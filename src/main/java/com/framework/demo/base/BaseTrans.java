@@ -19,7 +19,9 @@ public abstract class BaseTrans implements ITransProcessor {
         try{
             ITransProcessor proxy = (ITransProcessor) Proxy.newProxyInstance(ITransProcessor.class.getClassLoader(),
                     new Class[] {ITransProcessor.class}, new ITransProcessorProxy(this));
+            beforeProcessorHandle(transContext);
             proxy.processHandle(transContext);//动态代理处理
+            afterProcessorHandle(transContext);
             ITransProcessor nextProcessor = ProcessorContainer.get(
                     BeanUtils.getClassNameLowercase(this.getClass()));//这个this.getclass()表示调用该抽象类的那个对象的class
             if(nextProcessor!=null){
@@ -34,6 +36,13 @@ public abstract class BaseTrans implements ITransProcessor {
                 throw e;
             }
         }
+    }
+
+    private  void afterProcessorHandle(TransContext transContext){
+
+    }
+
+    private void beforeProcessorHandle(TransContext transContext) {
     }
 
     @Override

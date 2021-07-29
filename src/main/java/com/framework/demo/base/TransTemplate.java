@@ -3,6 +3,9 @@ package com.framework.demo.base;
 
 import com.framework.demo.annotation.TransDescription;
 import com.framework.demo.util.BeanUtils;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 
 public class TransTemplate {
     private static TransTemplate transTemplate = new TransTemplate();
@@ -32,6 +35,7 @@ public class TransTemplate {
      * 初始化处理顺序
      * @param trans
      */
+    @Bean
     private void initTransList(ITransProcessor trans) {
         TransDescription transDescription = trans.getClass().getAnnotation(TransDescription.class);
         if(transDescription!=null){

@@ -12,7 +12,7 @@ import java.util.Map;
 public class ProcessorContainer {
     private static ThreadLocal<Map<String, ITransProcessor>> nextProcessorContainer =
             new ThreadLocal<Map<String, ITransProcessor>>(){
-                protected Map<String,ITransProcessor> initialVal(){
+                protected Map<String,ITransProcessor> initialValue(){
                     return new HashMap<String,ITransProcessor>();
                 }
             };

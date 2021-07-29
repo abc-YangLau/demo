@@ -9,5 +9,6 @@ public class TransProcess3 extends BaseTrans {
     @Override
     public void processHandle(TransContext transContext) {
         System.out.println("第3个业务处理逻辑！");
+        System.out.println(transContext.getAmtTr()+transContext.getDateReq());
     }
 }

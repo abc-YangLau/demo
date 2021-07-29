@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class Test {
     @RequestMapping("/myTest")
     public void myTest() {
-        TransTemplate.getInstance().tansExecute(new CompeleteTask(),new TransContext());
+        TransContext transContext= new TransContext() ;
+        transContext.setAmtTr("100");
+        transContext.setDateReq("20210719");
+        TransTemplate.getInstance().tansExecute(new CompeleteTask(),transContext);
     }
 
-    public static void main(String[] args) {
-        TransTemplate.getInstance().tansExecute(new CompeleteTask(),new TransContext());
-    }
+
 }
