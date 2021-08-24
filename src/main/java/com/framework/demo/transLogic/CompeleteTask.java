@@ -14,6 +14,6 @@ import org.springframework.stereotype.Component;
 public class CompeleteTask extends BaseTrans {
     @Override
     public void processHandle(TransContext transContext) {
-        System.out.println("初始化！");
+        System.out.println(Thread.currentThread().getName()+"初始化！");
     }
 }

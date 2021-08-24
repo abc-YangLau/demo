@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class TransProcess3 extends BaseTrans {
     @Override
     public void processHandle(TransContext transContext) {
-        System.out.println("第3个业务处理逻辑！");
-        System.out.println(transContext.getAmtTr()+transContext.getDateReq());
+        System.out.println(Thread.currentThread().getName()+"第3个业务处理逻辑！");
+        System.out.println(Thread.currentThread().getName()+transContext.getAmtTr()+transContext.getDateReq());
     }
 }

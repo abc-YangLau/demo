@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class TransException extends BaseTrans {
     @Override
     public void processHandle(TransContext transContext) {
-        System.out.println("异常处理！");
+        System.out.println(Thread.currentThread().getName()+"异常处理！");
     }
 }

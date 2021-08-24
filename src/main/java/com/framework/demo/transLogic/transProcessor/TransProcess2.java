@@ -11,8 +11,7 @@ import org.springframework.stereotype.Component;
 public class TransProcess2 extends BaseTrans {
     @Override
     public void processHandle(TransContext transContext) {
-        System.out.println("第2个业务处理逻辑！");
-        System.out.println(transContext.getAmtTr()+transContext.getDateReq());
+        System.out.println(Thread.currentThread().getName()+"第2个业务处理逻辑！"+transContext.getAmtTr());
         int a = 12/0;
     }
 }

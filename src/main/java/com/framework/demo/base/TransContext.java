@@ -1,9 +1,11 @@
 package com.framework.demo.base;
 
+import java.math.BigDecimal;
+
 //处理逻辑前后交易传值使用
 public class TransContext {
     private String dateReq;
-    private String amtTr;
+    private BigDecimal amtTr;
     private String dbIdwltNo;
     private String crIdwltNo;
 
@@ -15,11 +17,11 @@ public class TransContext {
         this.dateReq = dateReq;
     }
 
-    public String getAmtTr() {
+    public BigDecimal getAmtTr() {
         return amtTr;
     }
 
-    public void setAmtTr(String amtTr) {
+    public void setAmtTr(BigDecimal amtTr) {
         this.amtTr = amtTr;
     }
 
