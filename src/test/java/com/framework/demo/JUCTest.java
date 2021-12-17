@@ -17,7 +17,7 @@ import java.util.concurrent.*;
 public class JUCTest {
     public static void main(String[] args) throws InterruptedException {
 //        CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
-////        ArrayList<String> list = new ArrayList<>();
+//        ArrayList<String> list = new ArrayList<>();
 //        for (int i = 0; i < 10000; i++) {
 //            new Thread(()->{
 //                list.add(Thread.currentThread().getName());
@@ -29,11 +29,11 @@ public class JUCTest {
 
 //        BlockingQueue<Runnable> workQueue = new BlockingDeque<Runnable>() ;
 
-        ExecutorService es = new ThreadPoolExecutor(10,
-                10,
+        ExecutorService es = new ThreadPoolExecutor(5,
+                5,
                 60,
                 TimeUnit.MILLISECONDS,
-                new TaskQueue(10),
+                new TaskQueue(1),
                 Executors.defaultThreadFactory(),
                 new RejectedExecutionHandler() {
                     @Override
@@ -48,7 +48,12 @@ public class JUCTest {
                 es.execute(new Runnable() {
                     @Override
                     public void run() {
-                        TransTemplate.getInstance().tansExecute(new CompeleteTask(),new TransContext());
+                        System.out.println(Thread.currentThread().getName());
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
