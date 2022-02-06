@@ -1,4 +1,4 @@
-package com.framework.demo;
+package com.framework;
 
 
 import org.springframework.boot.CommandLineRunner;
@@ -6,14 +6,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import java.util.Arrays;
 
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 @SpringBootApplication
 public class DemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
+    }
+
+    @Bean({"threadPoolTaskScheduler"})
+    public ThreadPoolTaskScheduler threadPoolTaskExecutor() {
+        return new ThreadPoolTaskScheduler();
     }
 
     @Bean

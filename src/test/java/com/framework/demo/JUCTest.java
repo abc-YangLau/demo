@@ -1,17 +1,8 @@
 package com.framework.demo;
 
-import com.framework.demo.base.TransContext;
-import com.framework.demo.base.TransTemplate;
-import com.framework.demo.transLogic.CompeleteTask;
-import com.framework.demo.transLogic.TaskTrans;
-import javafx.concurrent.Worker;
 import org.apache.tomcat.util.threads.TaskQueue;
 import org.apache.tomcat.util.threads.ThreadPoolExecutor;
 
-import java.util.AbstractQueue;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.*;
 
 public class JUCTest {

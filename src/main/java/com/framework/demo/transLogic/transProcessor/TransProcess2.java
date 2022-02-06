@@ -12,6 +12,6 @@ public class TransProcess2 extends BaseTrans {
     @Override
     public void processHandle(TransContext transContext) {
         System.out.println(Thread.currentThread().getName()+"第2个业务处理逻辑！"+transContext.getAmtTr());
-        int a = 12/0;
+//        int a = 12/0;
     }
 }
