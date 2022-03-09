@@ -15,6 +15,7 @@ public class TransProcess1 extends BaseTrans {
     private static final Logger logger = LoggerFactory.getLogger(BaseTrans.class);
     @Override
     public void processHandle(TransContext transContext) {
+
         logger.info("{}:第1个业务处理逻辑！{}",Thread.currentThread().getName(),transContext.getAmtTr());
         transContext.setAmtTr(transContext.getAmtTr().add(new BigDecimal(20)));
     }

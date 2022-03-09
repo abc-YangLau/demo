@@ -1,8 +1,6 @@
 package com.framework.aop;
 
 
-
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
