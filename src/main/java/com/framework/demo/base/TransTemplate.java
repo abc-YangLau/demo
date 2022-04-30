@@ -4,7 +4,6 @@ package com.framework.demo.base;
 import com.framework.demo.annotation.TransDescription;
 import com.framework.demo.util.BeanUtils;
 
-
 public class TransTemplate {
     private static TransTemplate transTemplate = new TransTemplate();
 
@@ -18,7 +17,8 @@ public class TransTemplate {
     /**
      *  执行程序
      */
-     public void tansExecute(ITransProcessor trans,TransContext transContext){
+
+    public void tansExecute(ITransProcessor trans,TransContext transContext){
          trans.setTransContext(transContext);
          initTransList(trans);//初始化处理类
          try {

@@ -7,6 +7,7 @@ import com.framework.demo.base.TransTemplate;
 import com.framework.demo.theardPool.AsyncThreadPoolConfig;
 import com.framework.demo.theardPool.TaskTrans;
 import com.framework.tables.perAccountInfo.perAccountInfoDAO.PerAccountDao;
+import com.framework.tables.perAccountInfo.perAccountInfoEntity.PerAccountEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.annotation.Async;
@@ -50,7 +51,11 @@ public class Test {
 
     }
 
-
+    /**
+     * 实循环提交多个线程任务，并行执行
+     * 每次提交的线程任务就是丢给线程池并调用call函数执行
+     * 下一次循环提交不等子线程完成
+     */
     @RequestMapping("/AsyncTest")
     public void exAsyncTest() {
         //创建线程池
@@ -64,17 +69,26 @@ public class Test {
         }
     }
 
+    /**
+     * 实现循环提交的多个线程任务，串行执行。
+     * 因为是使用了这个@Async。表示每次提交的任务丢给线程池处理，
+     * 但是下一次提交是在上一次提交的任务完成后再循环提交的。
+     * 猜测这个原因：因为是主线程执行的任务提交给线程池的某个线程异步执行，一个线程在异步线程池中只能占用一个线程
+     * 一个主线程值对应一个异步线程。因为即使我将注解放在TransTemplate类的tansExecute方法上也是这样的
+     *
+     * @return
+     */
     @Async("asyncTaskExecutor")
     @RequestMapping("/getAccount")
-    public void getAll() {
-//        return perAccountDao.getOne("622830127883478");
+    public PerAccountEntity getAll() {
         for (int i = 0; i < 10; i++) {
             TransContext trans = new TransContext();
             trans.setAmtTr(new BigDecimal(i));
             trans.setDateReq("20210719");
             TransTemplate.getInstance().tansExecute(new CompeleteTask(), trans);
         }
-
+        System.out.println("ans:" + perAccountDao.getOne("622830127883478").getAccountName());
+        return perAccountDao.getOne("622830127883478");
     }
 
 
