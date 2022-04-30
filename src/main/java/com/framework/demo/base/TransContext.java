@@ -8,6 +8,26 @@ public class TransContext {
     private BigDecimal amtTr;
     private String dbIdwltNo;
     private String crIdwltNo;
+    private Throwable throwable;
+
+    public Throwable getThrowable() {
+        return throwable;
+    }
+
+    public TransContext(String dateReq, BigDecimal amtTr, String dbIdwltNo, String crIdwltNo, Throwable throwable) {
+        this.dateReq = dateReq;
+        this.amtTr = amtTr;
+        this.dbIdwltNo = dbIdwltNo;
+        this.crIdwltNo = crIdwltNo;
+        this.throwable = throwable;
+    }
+
+    public TransContext() {
+    }
+
+    public void setThrowable(Throwable throwable) {
+        this.throwable = throwable;
+    }
 
     public String getDateReq() {
         return dateReq;

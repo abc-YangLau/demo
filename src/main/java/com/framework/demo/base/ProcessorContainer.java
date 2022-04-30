@@ -1,7 +1,5 @@
 package com.framework.demo.base;
 
-import com.framework.demo.base.ITransProcessor;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,19 +9,17 @@ import java.util.Map;
  */
 public class ProcessorContainer {
     private static ThreadLocal<Map<String, ITransProcessor>> nextProcessorContainer =
-            new ThreadLocal<Map<String, ITransProcessor>>(){
-                protected Map<String,ITransProcessor> initialValue(){
-                    return new HashMap<String,ITransProcessor>();
-                }
-            };
+            ThreadLocal.withInitial(HashMap::new);
+
 
     /**
      * 设置
+     *
      * @param currentBeanName
      * @param nextProcessor
      */
-    public static void put(String currentBeanName,ITransProcessor nextProcessor){
-        nextProcessorContainer.get().put(currentBeanName,nextProcessor);
+    public static void put(String currentBeanName, ITransProcessor nextProcessor) {
+        nextProcessorContainer.get().put(currentBeanName, nextProcessor);
     }
     public static ITransProcessor get(String currentBeanName){
         return nextProcessorContainer.get().get(currentBeanName);

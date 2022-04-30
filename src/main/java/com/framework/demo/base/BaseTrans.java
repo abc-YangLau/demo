@@ -30,19 +30,20 @@ public abstract class BaseTrans implements ITransProcessor {
                 System.out.println("交易结束！");
             }
         }catch (Exception e){
-            if(exceptionProcessor!=null&&exceptionProcessor instanceof ITransProcessor){
+            if (exceptionProcessor != null) {
                 exceptionProcessor.process(transContext);
-            }else{
+            } else {
                 throw e;
             }
         }
     }
 
-    private  void afterProcessorHandle(TransContext transContext){
+    public void afterProcessorHandle(TransContext transContext) {
 
     }
 
-    private void beforeProcessorHandle(TransContext transContext) {
+    public void beforeProcessorHandle(TransContext transContext) {
+
     }
 
     @Override

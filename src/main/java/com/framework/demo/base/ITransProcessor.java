@@ -1,13 +1,12 @@
 package com.framework.demo.base;
 
 
-import org.springframework.stereotype.Component;
-
 /**
  * 处理器接口
  */
 
 public interface ITransProcessor {
+
     public void process(TransContext transContext) throws Throwable;
     public void processHandle(TransContext transContext);
     public void setTransContext(TransContext transContext);
