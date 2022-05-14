@@ -11,6 +11,7 @@ import com.framework.tables.perAccountInfo.perAccountInfoEntity.PerAccountEntity
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,7 +60,7 @@ public class Test {
     @RequestMapping("/AsyncTest")
     public void exAsyncTest() {
         //创建线程池
-        AsyncTaskExecutor ser = asyncThreadPoolConfig.asyncTaskExecutor();
+        ThreadPoolTaskExecutor ser = asyncThreadPoolConfig.asyncTaskExecutor();
         for (int i = 0; i < 10; i++) {
             TransContext trans = new TransContext();
             trans.setAmtTr(new BigDecimal(i));
