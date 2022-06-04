@@ -18,12 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static jdk.nashorn.internal.runtime.JSType.isNumber;
 
 @RestController
 @RequestMapping(value = "/MyTrans")
 //@EnableAsync
-public class Test {
-
+public class Test  {
+    @Autowired TestThread testThread;
     @Autowired
     AsyncThreadPoolConfig asyncThreadPoolConfig;
     @Autowired
@@ -90,7 +94,40 @@ public class Test {
         }
         System.out.println("ans:" + perAccountDao.getOne("622830127883478").getAccountName());
         return perAccountDao.getOne("622830127883478");
+//        return "over";
     }
 
+    @RequestMapping("/getTestThread")
+    public void getTestThread() {
+        testThread.start();
+    }
 
+    public static void main(String[] args) {
+//        Pattern pattern = Pattern.compile("\\\\d+(\\\\.\\\\d{1,2})?");
+//        System.out.println(isBigDecimal("10.00"));
+//        System.out.println(pattern.matcher("10.00").matches());
+        String reg_money = "\\d+(\\.\\d{1,2})?";// 金额正则,可以没有小数，小数最多不超过两位
+        Pattern pattern = Pattern.compile(reg_money);
+        Matcher matcher = pattern.matcher("10.001");
+        boolean ismatch = matcher.matches();
+        System.out.println(ismatch);
+
+    }
+    public static boolean isBigDecimal(String str) {
+        java.util.regex.Matcher match =null;
+        if(isNumber(str)==true){
+            Pattern pattern = java.util.regex.Pattern.compile("[0-9]*");
+            match = pattern.matcher(str.trim());
+        }else{
+            if(str.trim().indexOf(".")==-1){
+                java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^[+-]?[0-9]*");
+                match = pattern.matcher(str.trim());
+            }else{
+                Pattern pattern = Pattern.compile("^(([0-9]|([1-9][0-9]{0,9}))((\\\\.[0-9]{1,2})?))$");
+                match = pattern.matcher(str.trim());
+            }
+        }
+        return match.matches();
+    }
 }
+

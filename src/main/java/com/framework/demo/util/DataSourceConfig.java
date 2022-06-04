@@ -29,30 +29,31 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = {"com.framework.tables"},sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfig {
 
-    @Autowired
-    ProperUtils properUtils;
+//    @Autowired
+//    ProperUtils properUtils;
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource(){
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setDriverClassName(properUtils.getDriverClassName());
-        dataSource.setUrl(properUtils.getUrl());
-        dataSource.setUsername(properUtils.getUsername());
-        dataSource.setPassword(properUtils.getPassword());
-        return dataSource;
+//        DruidDataSource dataSource = new DruidDataSource();
+//        dataSource.setDriverClassName(properUtils.getDriverClassName());
+//        dataSource.setUrl(properUtils.getUrl());
+//        dataSource.setUsername(properUtils.getUsername());
+//        dataSource.setPassword(properUtils.getPassword());
+//        return dataSource;
+        return new DruidDataSource();
     }
     @Bean
     public DataSourceTransactionManager dataSourceTransactionManager(){
         return new DataSourceTransactionManager(dataSource());
     }
-    @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory() throws Exception{
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.framework.tables.**.*Entity");
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:com/framework/tables/**/*DAO/*.xml"));
-        return sqlSessionFactoryBean.getObject();
-    }
+//    @Bean(name = "sqlSessionFactory")
+//    public SqlSessionFactory sqlSessionFactory() throws Exception{
+//        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+//        sqlSessionFactoryBean.setDataSource(dataSource());
+//        sqlSessionFactoryBean.setTypeAliasesPackage("com.framework.tables.**.*Entity");
+//        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:com/framework/tables/**/*DAO/*.xml"));
+//        return sqlSessionFactoryBean.getObject();
+//    }
 
 
 }
